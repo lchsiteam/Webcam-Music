@@ -121,4 +121,4 @@ def handsToParams(inputArray):
 
     return [volume,frequency,selectedWaveForm]
 
-# findHandPos([1280,720],True)
+# findHandPos(True)

@@ -5,7 +5,7 @@ import sys
 from main import *
 
 def startWebcam():
-    threading.Thread(target=findHandPos, daemon=True, args=(True)).start()
+    threading.Thread(target=findHandPos, daemon=True, args=(True,)).start()
 
     startWebcamButton.pack_forget()
     scaleModeButton.pack(padx=5, pady=5)
