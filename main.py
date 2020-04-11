@@ -1,7 +1,9 @@
 import cv2
 
-def findHandPos (xRes, yRes,scaleMode):
-    cameraResolution = [xRes, yRes]
+
+
+def findHandPos (camX,camY,scaleMode):
+    cameraResolution = [camX,camY]
     cap = cv2.VideoCapture(0)
 
     while(True):
@@ -48,6 +50,7 @@ def findHandPos (xRes, yRes,scaleMode):
 
         # Display the resulting frame
         cv2.imshow('frame',frame)
+        cv2.imshow('mask',roiOut)
         if (cv2.waitKey(1) & 0xFF == 4):
             break
 
@@ -118,4 +121,4 @@ def handsToParams(inputArray):
 
     return [volume,frequency,selectedWaveForm]
 
-handPos = findHandPos(1280,720,True)
+findHandPos([1280,720],True)
