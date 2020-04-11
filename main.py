@@ -1,7 +1,8 @@
 import cv2
 
-def findHandPos (cameraResolution):
-    cap = cv2.VideoCapture(1)
+def findHandPos (xRes, yRes):
+    cameraResolution = [xRes, yRes]
+    cap = cv2.VideoCapture(0)
 
     while(True):
         # Capture frame-by-frame
@@ -55,4 +56,3 @@ def findHandPos (cameraResolution):
     cap.release()
     cv2.destroyAllWindows()
 
-findHandPos([1280,720])
