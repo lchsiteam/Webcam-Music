@@ -111,11 +111,10 @@ def handsToParams(inputArray):
 
     selectedWaveForm = ''
 
-    if rightX >= 8/9 * screenWidth:
+    if rightX >= 7/9 * screenWidth:
         selectedWaveForm = Waveforms[2]
-    elif rightX >= 7/9 * screenWidth:
+    elif rightX >= 5/9 * screenWidth:
         selectedWaveForm = Waveforms[1]
-
     else:
         selectedWaveForm = Waveforms[0]
 
