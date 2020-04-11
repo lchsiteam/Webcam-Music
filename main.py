@@ -48,13 +48,12 @@ def findHandPos (xRes, yRes,scaleMode):
 
         # Display the resulting frame
         cv2.imshow('frame',frame)
+        if (cv2.waitKey(1) & 0xFF == 4):
+            break
 
-    # When everything done, release the capture
-    cap.release()
-    cv2.destroyAllWindows()
-        #outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
-        #params = handsToParams(outArray)
-        #print(params)
+        outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
+        params = handsToParams(outArray)
+        print(params)
 
     # When everything done, release the capture
     cap.release()
