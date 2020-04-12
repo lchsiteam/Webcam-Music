@@ -6,7 +6,6 @@ from main import *
 import sd_testing
 import builtins
 
-builtins.run = True
 
 def startWebcam():
     builtins.run = True
@@ -32,6 +31,10 @@ def stopWebcam():
 def toggleScaleMode():
     global scaleMode
     scaleMode.set(not scaleMode.get())
+    if scaleMode.get():
+        scaleModeString.set("enabled")
+    else:
+        scaleModeString.set("disabled")
 
 # define a window
 window = tk.Tk(className = " Webcam Music!")
@@ -39,8 +42,11 @@ window.configure(background = "#002b36")
 window.geometry("480x480")
 window.resizable(width=False, height=False)
 
+builtins.run = True
 scaleMode = tk.BooleanVar()
 scaleMode.set(True)
+scaleModeString = tk.StringVar()
+scaleModeString.set("enabled")
 
 # add title
 title = tk.Label(
@@ -87,7 +93,7 @@ scaleModeHeader = scaleModeStatus = tk.Label(
 scaleModeHeader.place(x=100, y=200)
 
 scaleModeStatus = tk.Label(
-    textvariable = scaleMode,
+    textvariable = scaleModeString,
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
