@@ -3,9 +3,11 @@ import threading
 import os
 import sys
 from main import *
+import sd_testing
 
 def startWebcam():
     threading.Thread(target=findHandPos, daemon=True, args=(scaleMode.get(),)).start()
+    threading.Thread(target=sd_testing.run, daemon=True).start() 
 
     startWebcamButton.pack_forget()
     scaleModeButton.pack_forget()

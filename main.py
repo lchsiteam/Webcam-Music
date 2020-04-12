@@ -1,6 +1,6 @@
 import cv2
 
-
+import data
 
 def findHandPos (scaleMode):
     cap = cv2.VideoCapture(0)
@@ -57,6 +57,9 @@ def findHandPos (scaleMode):
 
         outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
         params = handsToParams(outArray)
+        volume, frequency, waveform = params
+
+        data.frequency = frequency
         print(params)
 
     # When everything done, release the capture
