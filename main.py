@@ -19,7 +19,6 @@ def findHandPos (scaleMode):
     bgModel = -1
 
     while True:
-        
         x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
         y_size=1  #  (don't edit)
         threshold = 60
@@ -100,7 +99,6 @@ def findHandPos (scaleMode):
             # Display the resulting frame
             #cv2.imshow('frame',frame)
             #cv2.imshow('mask',img)
-            
 
             outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
             params = handsToParams(outArray)
@@ -109,8 +107,6 @@ def findHandPos (scaleMode):
             data.frequency = frequency
             data.volume = volume
             data.waveform = waveform
-
-            print("updated")
 
             builtins.captureBackground = False
 
