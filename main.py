@@ -13,7 +13,7 @@ def removeBG(frame):
     return res
 
 def findHandPos (scaleMode):
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
 
