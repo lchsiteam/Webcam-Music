@@ -1,10 +1,7 @@
 import sounddevice as sd
 import numpy as np
-import random
 import math
 import data
-import time
-import builtins
 import wave
 import scipy.io.wavfile
 
