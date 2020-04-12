@@ -7,8 +7,8 @@ import numpy as np
 #2) press x
 #3) move hands into respective boxes
 
-builtins.captureBackground = False
-builtins.run = True
+data.captureBackground = False
+data.run = True
 
 x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
 y_size=1  #  (don't edit)
@@ -82,9 +82,9 @@ def findHandPos (scaleMode):
         
         cv2.imshow('original', frame)
 
-        if builtins.captureBackground:
+        if data.captureBackground:
             bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
-            builtins.captureBackground = False
+            data.captureBackground = False
 
         #  big boi calculations
         if bgModel != -1:
@@ -169,7 +169,7 @@ def findHandPos (scaleMode):
                 data.volume = volume
                 data.waveform = waveform
 
-        if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
+        if (cv2.waitKey(1) & 0xFF == 4 or not data.run):
             break
 
     # When everything done, release the capture

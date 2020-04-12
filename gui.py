@@ -5,10 +5,11 @@ import sys
 from main import *
 import sd_testing
 import builtins
+import data
 
 
 def startWebcam():
-    builtins.run = True
+    data.run = True
     threading.Thread(target=findHandPos, daemon=True, args=(scaleMode.get(),)).start()
     threading.Thread(target=sd_testing.run, daemon=True).start() 
 
@@ -20,7 +21,7 @@ def startWebcam():
     captureBackgroundButton.pack(padx=5, pady=5)
 
 def stopWebcam():
-    builtins.run = False
+    data.run = False
 
     startWebcamButton.pack(padx=5, pady=5)
     scaleModeButton.pack(padx=5, pady=5)
@@ -39,7 +40,7 @@ def toggleScaleMode():
         scaleModeString.set("disabled")
 
 def captureBackground():
-    builtins.captureBackground = True
+    data.captureBackground = True
 
 # define a window
 window = tk.Tk(className = " Webcam Music!")
@@ -47,7 +48,7 @@ window.configure(background = "#002b36")
 window.geometry("480x480")
 window.resizable(width=False, height=False)
 
-builtins.run = True
+data.run = True
 scaleMode = tk.BooleanVar()
 scaleMode.set(True)
 scaleModeString = tk.StringVar()

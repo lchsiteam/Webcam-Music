@@ -34,8 +34,9 @@ def run():
     index = 0
     #prev_n = None
     #current_freq = 440
+    contents = [] 
 
-    while True: 
+    while data.run: 
         rounds, a_index = divmod(index, len(t)) 
 
         a = rounds + t[a_index] 
@@ -71,9 +72,10 @@ def run():
 
         array = np.array((actual_n,), np.float32) #the thing that gets written to the stream to produce sound
 
+        contents.append(array) 
+
         s.write(array) #writes to stream to produce sound
 
         index += 1
-
-        if not builtins.run:
-            break
+    else: 
+        print(len(contents)) 
