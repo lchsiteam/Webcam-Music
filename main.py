@@ -88,7 +88,7 @@ def handsToParams(inputArray):
     volume = 100 - ( (leftY / screenHeight) * 100)
 
     if not scaleMode:
-        frequency = ( (rightY / screenHeight) * 261.625) + 261.626
+        frequency = 523.252 - ( (rightY / screenHeight) * 261.625) 
     else:
         if rightY <= 1/13 * screenHeight:
             frequency = frequencyList[0]
