@@ -51,7 +51,7 @@ How to better and more efficiently work on programs in teams, as well as learnin
 We plan to improve and eventually publish our creation so that others can have fun with the tool we enjoy.  We will likely code the system to recognize hand gestures, and perform more musical features such as holding a note or a staccato.
 
 
-
+##
 
 
 # How to install project
