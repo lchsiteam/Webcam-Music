@@ -18,16 +18,17 @@ def findHandPos (scaleMode):
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
     bgModel = -1
     
+    x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
+    y_size=1  #  (don't edit)
+    x1_max=0 #right hand x coor
+    x2_max=0 #left hand x coor
+    y1_max=719 #right hand y coor
+    y2_max=719 #left hand y coor
+    threshold = 60
+    isBgCaptured = 0
 
     while True:
-        x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
-        y_size=1  #  (don't edit)
-        x1_max=0 #right hand x coor
-        x2_max=0 #left hand x coor
-        y1_max=719 #right hand y coor
-        y2_max=719 #left hand y coor
-        threshold = 60
-        isBgCaptured = 0
+        
 
         
         # Capture frame-by-frame
