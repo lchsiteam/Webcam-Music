@@ -34,6 +34,8 @@ def run():
     index = 0
     #prev_n = None
     #current_freq = 440
+    current_freq = None
+    freqs = [] 
 
     while True: 
         rounds, a_index = divmod(index, len(t)) 
@@ -44,7 +46,12 @@ def run():
         
         #print(current_freq) 
 
-        current_freq = data.frequency
+        freqs.append(data.frequency) 
+
+        if len(freqs) > 5: 
+            freqs.pop(0) 
+        
+        current_freq = sum(freqs) / 5
 
         thing = current_freq * a * 2 * np.pi
 
@@ -70,7 +77,7 @@ def run():
         #print(n) 
         #a, overflowed = s.read(1) 
 
-        array = np.array((actual_n, actual_n), np.float32) 
+        array = np.array((actual_n,), np.float32) 
 
         s.write(array) 
 
