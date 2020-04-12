@@ -8,7 +8,7 @@ import builtins
 
 builtins.run = True
 
-if main.scaleMode:
+if scaleMode.get():    
     extraText = "active"
 else:
     extraText = "disabled"
