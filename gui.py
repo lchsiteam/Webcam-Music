@@ -7,7 +7,8 @@ import sd_testing
 import builtins
 
 builtins.run = True
-if scaleMode:
+
+if main.scaleMode:
     extraText = "active"
 else:
     extraText = "disabled"
