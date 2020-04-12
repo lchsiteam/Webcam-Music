@@ -68,12 +68,14 @@ def findHandPos (scaleMode):
             # binary boi
             gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
             gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+            gray3 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             blur1 = cv2.GaussianBlur(gray1, (41, 41), 0) #<--blur boi 1
             blur2 = cv2.GaussianBlur(gray2, (41, 41), 0) #<--blur boi 2
+            blur3 = cv2.GaussianBlur(gray3, (41, 41), 0) #<--blur boi 2
             ret, thresh1 = cv2.threshold(blur1, threshold, 255, cv2.THRESH_BINARY)
             ret, thresh2 = cv2.threshold(blur2, threshold, 255, cv2.THRESH_BINARY)
-            cv2.imshow('ori 1', thresh1)
-            cv2.imshow('ori 2', thresh2)
+            ret, thresh3 = cv2.threshold(blur3, threshold, 255, cv2.THRESH_BINARY)
+            cv2.imshow('Mask', thresh3)
 
             contours1, hierarchy1 = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
             contours2, hierarchy2 = cv2.findContours(thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)

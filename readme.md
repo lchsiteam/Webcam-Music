@@ -1,5 +1,5 @@
 # How to install project
-Install opencv: pip install opencv-python==3.4.9.33
+Install opencv: pip install opencv-python
 
 Add Cascadia Code font: [Github](https://github.com/microsoft/cascadia-code/releases/download/v1911.21/CascadiaPL.ttf)
 
