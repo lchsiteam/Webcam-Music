@@ -16,6 +16,7 @@ def startWebcam():
     scaleModeButton.pack_forget()
     scaleModeHeader.place_forget()
     scaleModeStatus.place_forget()
+    captureBackgroundButton.pack(padx=5, pady=5)
     stopWebcamButton.pack(padx=5, pady=5)
 
 def stopWebcam():
@@ -26,6 +27,7 @@ def stopWebcam():
     scaleModeHeader.place(x=100, y=200)
     scaleModeStatus.place(x=300, y=200)
 
+    captureBackgroundButton.pack_forget()
     stopWebcamButton.pack_forget()
 
 def toggleScaleMode():
@@ -101,6 +103,18 @@ scaleModeStatus = tk.Label(
 scaleModeStatus.place(x=300, y=200)
 
 # After webcam started
+captureBackgroundButton = tk.Button(
+    text = "Capture Background",
+    width = 25,
+    height = 2,
+    fg = "#268bd2",
+    bg = "#073642",
+    font = ('Cascadia Code PL', 15),
+    borderwidth = 0,
+    activebackground = "#2aa198",
+    command = None
+)
+
 stopWebcamButton = tk.Button(
     text = "Stop Webcam",
     width = 25,
