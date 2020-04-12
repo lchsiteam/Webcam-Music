@@ -80,6 +80,7 @@ def run():
 
         index += 1
     else: 
+        #saves to wav file
         c_array = np.array(contents, dtype=np.float32) 
 
         scipy.io.wavfile.write('audio.wav', fs, c_array) 
