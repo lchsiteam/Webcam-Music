@@ -215,35 +215,35 @@ def handsToParams(inputArray):
 
 
     if not scaleMode:
-        frequency = 523.25 - ( ( (rightX - rightSideSupplement) / rightSideWidth) * 261.625)
+        frequency =  ( ( (rightX - rightSideSupplement) / rightSideWidth) *  261.625) +  261.625
 
     else:
         if rightX <= 1/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[0]
+            frequency = frequencyList[12]
         elif rightX <= 2/13 * rightSideWidth + rightSideSupplement :
-            frequency = frequencyList[1]
+            frequency = frequencyList[11]
         elif rightX <= 3/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[2]
+            frequency = frequencyList[10]
         elif rightX <= 4/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[3]
+            frequency = frequencyList[9]
         elif rightX <= 5/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[4]
+            frequency = frequencyList[8]
         elif rightX <= 6/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[5]
+            frequency = frequencyList[7]
         elif rightX <= 7/13 * rightSideWidth + rightSideSupplement:
             frequency = frequencyList[6]
         elif rightX <= 8/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[7]
+            frequency = frequencyList[5]
         elif rightX <= 9/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[8]
+            frequency = frequencyList[4]
         elif rightX <= 10/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[9]
+            frequency = frequencyList[3]
         elif rightX <= 11/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[10]
+            frequency = frequencyList[2]
         elif rightX <= 12/13 * rightSideWidth + rightSideSupplement:
-            frequency = frequencyList[11]
+            frequency = frequencyList[1]
         else:
-            frequency = frequencyList[12]
+            frequency = frequencyList[0]
 
     return [volume,frequency,selectedWaveForm]
 
