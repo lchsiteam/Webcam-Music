@@ -8,6 +8,7 @@ import builtins
 
 builtins.run = True
 
+global scaleMode
 if scaleMode.get():    
     extraText = "active"
 else:
