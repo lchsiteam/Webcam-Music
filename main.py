@@ -131,8 +131,8 @@ def findHandPos (scaleMode):
 
                 cv2.circle(frame,(frame.shape[1]//40,y2_max),4,(240,40,40),4) #volume dot
                 cv2.circle(frame,(frame.shape[1]*39//40,y1_max),4,(240,40,40),4) #On/Off dot
-                cv2.circle(frame, (x2_max, frame[0].shape//40*39), 4, (240, 40, 40), 4) #waveform dot
-                cv2.circle(frame, (x1_max, frame[0].shape//40*39), 4, (240, 40, 40), 4) #pitch dot
+                cv2.circle(frame, (x2_max, frame.shape[0]//40*39), 4, (240, 40, 40), 4) #waveform dot
+                cv2.circle(frame, (x1_max, frame.shape[0]//40*39), 4, (240, 40, 40), 4) #pitch dot
 
                 cv2.imshow('original', frame) #draw frame
                     
