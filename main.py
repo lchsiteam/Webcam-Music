@@ -22,10 +22,16 @@ def findHandPos (scaleMode):
     while True:
         x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
         y_size=1  #  (don't edit)
+        x1_max=0 #right hand x coor
+        x2_max=0 #left hand x coor
+        y1_max=719 #right hand y coor
+        y2_max=719 #left hand y coor
         threshold = 60
+        isBgCaptured = 0
 
+        
         # Capture frame-by-frame
-        ret, frame = cap.read()
+        
 
         '''
         frame=cv2.flip(frame,1)
@@ -34,25 +40,26 @@ def findHandPos (scaleMode):
         ret,thresh = cv2.threshold(gray,200,255,0)
         '''
 
+        ret, frame = cap.read()
         frame = cv2.bilateralFilter(frame, 5, 50, 100)
         frame=cv2.flip(frame,1)
         cv2.rectangle(frame, (int(x_size * frame.shape[1]), 0),
                     (frame.shape[1], int(y_size * frame.shape[0])), (255, 0, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
         cv2.rectangle(frame, (int((x_size-0.003) * frame.shape[1]), 0),
                     (0, int(y_size * frame.shape[0])), (0, 255, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
-        
-        #  big boi calculations
-        
+        cv2.imshow('original', frame)
+
         if builtins.captureBackground:
             bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
             builtins.captureBackground = False
-            
+
+        #  big boi calculations
         if bgModel != -1:
             fgmask = bgModel.apply(frame,learningRate=0)
             kernel = np.ones((3, 3), np.uint8)
             fgmask = cv2.erode(fgmask, kernel, iterations=1)
             img = cv2.bitwise_and(frame, frame, mask=fgmask)
-
+            
             img1 = img[0:int(y_size * frame.shape[0]),
                         int(x_size * frame.shape[1]):frame.shape[1]]
             img2 = img[0:int(y_size * frame.shape[0]),
@@ -61,55 +68,66 @@ def findHandPos (scaleMode):
             # binary boi
             gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
             gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
-            gray3 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             blur1 = cv2.GaussianBlur(gray1, (41, 41), 0) #<--blur boi 1
             blur2 = cv2.GaussianBlur(gray2, (41, 41), 0) #<--blur boi 2
-            blur3 = cv2.GaussianBlur(gray3, (41, 41), 0) #<--blur boi 3
             ret, thresh1 = cv2.threshold(blur1, threshold, 255, cv2.THRESH_BINARY)
             ret, thresh2 = cv2.threshold(blur2, threshold, 255, cv2.THRESH_BINARY)
-            ret, thresh3 = cv2.threshold(blur3, threshold, 255, cv2.THRESH_BINARY)
-            cv2.imshow('ori1', thresh3)
+            cv2.imshow('ori 1', thresh1)
+            cv2.imshow('ori 2', thresh2)
 
-            MLeft = cv2.moments(thresh2)
-            MRight = cv2.moments(thresh1)
-            
-                # calculate x,y coordinate of center
-            if (MLeft["m00"] != 0):
-                leftcX = int(MLeft["m10"] / MLeft["m00"])
-                leftcY = int(MLeft["m01"] / MLeft["m00"])
+            contours1, hierarchy1 = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            contours2, hierarchy2 = cv2.findContours(thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            length1 = len(contours1)
+            length2 = len(contours2)
+            maxArea = -1
+            if length1 > 0:
+                for i in range(length1):
+                    temp = contours1[i]
+                    area = cv2.contourArea(temp)
+                    if area > maxArea:
+                        maxArea = area
+                        ci = i
+                res = contours1[ci]
+                y1_max = 719
+                for i in range(len(res)):
+                    res[i][0][0]+=(frame.shape[1]/3.0)
+                    if res[i][0][1] < y1_max:
+                        y1_max = res[i][0][1]
+                        x1_max = res[i][0][0]
+                cv2.drawContours(frame, [res], 0, (0, 255, 0), 2)
+                cv2.circle(frame, (x1_max, y1_max), 3, (0, 0, 255), 3)
 
-                cv2.circle(frame, (leftcX, leftcY), 5, (255, 255, 255), -1)
-                cv2.putText(frame, "centroid Left", (leftcX - 25, leftcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-            else:
-                leftcX = -1
-                leftcY = -1
+                maxArea = -1
+                if length2 > 0:
+                    for i in range(length2):
+                        temp = contours2[i]
+                        area = cv2.contourArea(temp)
+                        if area > maxArea:
+                            maxArea = area
+                            ci = i
+                    res = contours2[ci]
+                    y2_max = 719
+                    for i in range(len(res)):
+                        if res[i][0][1] < y2_max:
+                            y2_max = res[i][0][1]
+                            x2_max = res[i][0][0]
+                    cv2.drawContours(frame, [res], 0, (0, 255, 0), 2)
+                    cv2.circle(frame, (x2_max, y2_max), 3, (0, 0, 255), 3)
 
-            if (MRight["m00"] != 0):
-                # calculate x,y coordinate of center
-                rightcX = int(MRight["m10"] / MRight["m00"])
-                rightcY = int(MRight["m01"] / MRight["m00"])
+                cv2.imshow('original', frame)
+                    
 
-                rightcX += cameraResolution[0]//3
+                # Display the resulting frame
+                #cv2.imshow('frame',frame)
+                #cv2.imshow('mask',img)
 
+                outArray = [cameraResolution,x2_max,y2_max,x1_max,y1_max,scaleMode]
+                params = handsToParams(outArray)
+                volume, frequency, waveform = params
 
-                cv2.circle(frame, (rightcX, rightcY), 5, (255, 255, 255), -1)
-                cv2.putText(frame, "centroid Right", (rightcX - 25, rightcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-            else:
-                rightcX = -1
-                rightcY = -1
-
-            # Display the resulting frame
-            cv2.imshow('original', frame)
-            #cv2.imshow('frame',frame)
-            #cv2.imshow('mask',img)
-
-            outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
-            params = handsToParams(outArray)
-            volume, frequency, waveform = params
-
-            data.frequency = frequency
-            data.volume = volume
-            data.waveform = waveform
+                data.frequency = frequency
+                data.volume = volume
+                data.waveform = waveform
 
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
