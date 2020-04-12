@@ -3,8 +3,7 @@ import data
 import builtins
 import numpy as np
 
-global bgModel
-bgModel = -1
+builtins.captureBackground = False
 builtins.run = True
 
 def removeBG(frame):
@@ -14,14 +13,12 @@ def removeBG(frame):
     res = cv2.bitwise_and(frame, frame, mask=fgmask)
     return res
 
-def newBackround():
-    bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
-
 def findHandPos (scaleMode):
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
+    bgModel = -1
 
-    while(True):
+    while True:
         
         x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
         y_size=1  #  (don't edit)
@@ -47,8 +44,8 @@ def findHandPos (scaleMode):
 
         #  big boi calculations
         
-        if bgModel != -1:
-
+        if builtins.captureBackground:
+            bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
             fgmask = bgModel.apply(frame,learningRate=0)
             kernel = np.ones((3, 3), np.uint8)
             fgmask = cv2.erode(fgmask, kernel, iterations=1)
@@ -112,6 +109,10 @@ def findHandPos (scaleMode):
             data.frequency = frequency
             data.volume = volume
             data.waveform = waveform
+
+            print("updated")
+
+            builtins.captureBackground = False
 
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break

@@ -38,6 +38,9 @@ def toggleScaleMode():
     else:
         scaleModeString.set("disabled")
 
+def captureBackground():
+    builtins.captureBackground = True
+
 # define a window
 window = tk.Tk(className = " Webcam Music!")
 window.configure(background = "#002b36")
@@ -112,7 +115,7 @@ captureBackgroundButton = tk.Button(
     font = ('Cascadia Code PL', 15),
     borderwidth = 0,
     activebackground = "#2aa198",
-    command = None
+    command = captureBackground
 )
 
 stopWebcamButton = tk.Button(
