@@ -7,6 +7,10 @@ import sd_testing
 import builtins
 
 builtins.run = True
+if scaleMode:
+    extraText = "active"
+else:
+    extraText = "disabled"
 
 def startWebcam():
     builtins.run = True
@@ -87,10 +91,7 @@ scaleModeHeader = scaleModeStatus = tk.Label(
 scaleModeHeader.place(x=100, y=200)
 
 scaleModeStatus = tk.Label(
-    if scaleMode:
-        text = "active"
-    else:
-        text = "disabled"
+    text = extraText,
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
