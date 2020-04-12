@@ -32,6 +32,8 @@ def sgn(num):
 
 def run(): 
     index = 0
+    #prev_n = None
+    #current_freq = 440
 
     while True: 
         rounds, a_index = divmod(index, len(t)) 
@@ -39,20 +41,36 @@ def run():
         a = rounds + t[a_index] 
 
         #print(data.frequency) 
+        
+        #print(current_freq) 
 
-        thing = data.frequency * a * 2 * np.pi
+        current_freq = data.frequency
+
+        thing = current_freq * a * 2 * np.pi
 
         pre_amp = math.sin(thing) 
 
         if data.waveform == 'Square': 
             pre_amp = sgn(pre_amp) 
+        elif data.waveform == 'Triangle': 
+            ref = a * current_freq - math.floor(a * current_freq) 
+            
+            pre_amp = abs(ref - round(ref)) * 2
 
-        n = data.volume * pre_amp / 30
+        actual_n = n = data.volume * pre_amp / 30
+
+        '''
+        if (prev_n is not None and (prev_n <= 0 and n >= 0 or prev_n >= 0 and n <= 0)): 
+            if current_freq != data.frequency: 
+                current_freq = data.frequency
+
+                actual_n = 0
+        ''' 
 
         #print(n) 
         #a, overflowed = s.read(1) 
 
-        array = np.array((n, n), np.float32) 
+        array = np.array((actual_n, actual_n), np.float32) 
 
         s.write(array) 
 
