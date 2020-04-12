@@ -1,34 +1,33 @@
-###TitanHacks 2020
+### TitanHacks 2020
 
-##Project Name
+## Project Name
 Webcam Music (scroll all the way to bottom for installation instructions)
 
 ## Github Link
 https://github.com/lchsiteam/theremin
 
-##Here's the elevator pitch
+## Here's the elevator pitch
 What's your idea? This will be a short tagline for the project
 An instrument that you can play with your webcam anytime from anywhere.
 
-##It's built with
+## It's built with
 Python, OpenCV, Tkinter, Numpy, Scipy, Sounddevice, threading
 
-##About Us
+## About Us
 Team: Clawdawgs-19
 
-##School and Club
+## School and Club
 LCHS iTeam of La Cañada High School - https://github.com/lchsiteam
 
-##Team members devpost, github, and discord
+## Team members devpost, github, and discord
 Bryan Wang: https://devpost.com/the-non-feline - https://github.com/the-non-feline - not a cat#9738
 Ryan King - https://devpost.com/RyantheKing - https://github.com/RyantheKing - RyantheKing#9710
 Devyn Oh - https://devpost.com/thepnkprkr - https://github.com/MC-Atom - MC_Atom#1733
 Kai Bredemann - https://devpost.com/awesomehaze - https://github.com/awesomehaze - haze#2948
 Ean Jeffries - https://devpost.com/epicean - https://github.com/epicodaboss - Epico (Ean)#2393 - 
 
-##
 
-Here's the whole story
+### Here's the whole story
 
 ## Inspiration
 We were inspired by music. Half of our group is in choir, and half of our group makes original music for fun. Making music is very fun and rewarding, but it’s very hard for beginners to figure out some of the more complicated aspects. This project makes it easier for those beginners to have some fun creating music, even if it’s not super practical.
