@@ -62,6 +62,7 @@ def findHandPos (scaleMode):
         volume, frequency, waveform = params
 
         data.frequency = frequency
+        data.volume = volume
         print(params)
 
     # When everything done, release the capture
