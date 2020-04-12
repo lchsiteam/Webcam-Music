@@ -55,7 +55,7 @@ scaleModeString.set("enabled")
 
 # add title
 title = tk.Label(
-    text = "clawdags-19 webcam music",
+    text = "clawdawgs-19 webcam music",
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 20)
