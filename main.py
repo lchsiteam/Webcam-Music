@@ -17,6 +17,7 @@ def findHandPos (scaleMode):
     cap = cv2.VideoCapture(0)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
     bgModel = -1
+    
 
     while True:
         
@@ -46,6 +47,9 @@ def findHandPos (scaleMode):
         
         if builtins.captureBackground:
             bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
+            builtins.captureBackground = False
+            
+        if bgModel != -1:
             fgmask = bgModel.apply(frame,learningRate=0)
             kernel = np.ones((3, 3), np.uint8)
             fgmask = cv2.erode(fgmask, kernel, iterations=1)
@@ -112,7 +116,7 @@ def findHandPos (scaleMode):
 
             print("updated")
 
-            builtins.captureBackground = False
+            
 
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
