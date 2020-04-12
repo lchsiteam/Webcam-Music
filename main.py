@@ -54,10 +54,27 @@ def findHandPos (scaleMode):
         cv2.putText(frame,'Off',(frame.shape[1]//40*35,frame.shape[0]//40*37),font,1,(255,140,140),1)
 
         cv2.line(frame,(frame.shape[1]//40,frame.shape[0]//40),(frame.shape[1]//40,frame.shape[0]//40*38),(40,40,240),2) #volume Line, Left side of the screen
-        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//40),(frame.shape[1]//40*39,frame.shape[0]//3*2),(40,240,40),2) #volume Line, right side of the screen, green
-        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//3*2),(frame.shape[1]//40*39,frame.shape[0]//40*38),(40,40,240),2) #volume Line, right side of the screen, red, bottom
+        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//40),(frame.shape[1]//40*39,frame.shape[0]//3*2),(40,240,40),2) #On Line, right side of the screen, green
+        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//3*2),(frame.shape[1]//40*39,frame.shape[0]//40*38),(40,40,240),2) #Off Line, right side of the screen, red, bottom
 
-        cv2.line(frame,(frame.shape[1]//36 ,frame.shape[0]//60*59),(frame.shape[1]//40*39,frame.shape[0]//60*59),(40,40,240),2) #volume Line, right side of the screen, red, bottom
+        cv2.line(frame,(frame.shape[1]//36 ,frame.shape[0]//60*59),(frame.shape[1]//9,frame.shape[0]//60*59),(40,240,40),3) #Square Line, left side of the screen, Green
+        cv2.line(frame,(frame.shape[1]//9 ,frame.shape[0]//60*59),(frame.shape[1]//9*2,frame.shape[0]//60*59),(40,240,240),3) #Triangle Line, left side of the screen, Yellow, 
+        cv2.line(frame,(frame.shape[1]//9*2 ,frame.shape[0]//60*59),(frame.shape[1]//108*40,frame.shape[0]//60*59),(240,40,40),3) #Sine Line, left side of the screen, Bule,
+
+        cv2.line(frame,(int(frame.shape[1]//19.5*6 +frame.shape[0]//19),frame.shape[0]//60*59),(int(frame.shape[1]//19.5*7+frame.shape[0]//19),frame.shape[0]//60*59),(31,63,246),3) #The 13 pitches at the bottom
+        cv2.line(frame,(int(frame.shape[1]//19.5*7 +frame.shape[0]//19),frame.shape[0]//60*59),(int(frame.shape[1]//19.5*8+frame.shape[0]//19),frame.shape[0]//60*59),(14,198,160),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*8 +frame.shape[0]//19),frame.shape[0]//60*59),(int(frame.shape[1]//19.5*9+frame.shape[0]//19),frame.shape[0]//60*59),(40,40,40),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*9 +frame.shape[0]//19),frame.shape[0]//60*59),(int(frame.shape[1]//19.5*10+frame.shape[0]//19),frame.shape[0]//60*59),(207,122,77),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*10+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*11+frame.shape[0]//19),frame.shape[0]//60*59),(40,40,40),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*11+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*12+frame.shape[0]//19),frame.shape[0]//60*59),(1,166,252),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*12+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*13+frame.shape[0]//19),frame.shape[0]//60*59),(40,40,40),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*13+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*14+frame.shape[0]//19),frame.shape[0]//60*59),(172,98,173),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*14+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*15+frame.shape[0]//19),frame.shape[0]//60*59),(1,235,255),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*15+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*16+frame.shape[0]//19),frame.shape[0]//60*59),(40,40,40),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*16+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*17+frame.shape[0]//19),frame.shape[0]//60*59),(172,181,17),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*17+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*18+frame.shape[0]//19),frame.shape[0]//60*59),(40,40,40),3) 
+        cv2.line(frame,(int(frame.shape[1]//19.5*18+frame.shape[0]//19) ,frame.shape[0]//60*59),(int(frame.shape[1]//19.5*19+frame.shape[0]//19),frame.shape[0]//60*59),(31,63,246),3) 
+     
 
         cv2.imshow('original', frame)
         
@@ -131,6 +148,8 @@ def findHandPos (scaleMode):
 
                 cv2.circle(frame,(frame.shape[1]//40,y2_max),4,(240,40,40),4) #volume dot
                 cv2.circle(frame,(frame.shape[1]*39//40,y1_max),4,(240,40,40),4) #On/Off dot
+                cv2.circle(frame, (x2_max, frame.shape[0]//40*39), 4, (240, 40, 40), 4) #waveform dot
+                cv2.circle(frame, (x1_max, frame.shape[0]//40*39), 4, (240, 40, 40), 4) #pitch dot
 
                 cv2.imshow('original', frame) #draw frame
                     
