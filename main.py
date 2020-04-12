@@ -13,25 +13,60 @@ def removeBG(frame):
     return res
 
 def findHandPos (scaleMode):
-    cap = cv2.VideoCapture(0)
-
+    cap = cv2.VideoCapture(1)
+    bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
 
     while(True):
+        
+        x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
+        y_size=1  #  (don't edit)
+        threshold = 60
+
         # Capture frame-by-frame
         ret, frame = cap.read()
-        frame=cv2.flip(frame,1)
 
+        '''
+        frame=cv2.flip(frame,1)
         # Our operations on the frame come here
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         ret,thresh = cv2.threshold(gray,200,255,0)
+        '''
 
-        roiOut=thresh[0:cameraResolution[1], 0:cameraResolution[0]]
-        roiLeft=thresh[0:cameraResolution[1], 0:cameraResolution[0]//3]
-        roiRight=thresh[0:cameraResolution[1], cameraResolution[0]//3:cameraResolution[0]]
+        frame = cv2.bilateralFilter(frame, 5, 50, 100)
+        frame=cv2.flip(frame,1)
+        cv2.rectangle(frame, (int(x_size * frame.shape[1]), 0),
+                    (frame.shape[1], int(y_size * frame.shape[0])), (255, 0, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
+        cv2.rectangle(frame, (int((x_size-0.003) * frame.shape[1]), 0),
+                    (0, int(y_size * frame.shape[0])), (0, 255, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
+        cv2.imshow('original', frame)
 
-        MLeft = cv2.moments(roiLeft)
-        MRight = cv2.moments(roiRight)
+        #  big boi calculations
+        
+        fgmask = bgModel.apply(frame,learningRate=0)
+        kernel = np.ones((3, 3), np.uint8)
+        fgmask = cv2.erode(fgmask, kernel, iterations=1)
+        img = cv2.bitwise_and(frame, frame, mask=fgmask)
+
+        img1 = img[0:int(y_size * frame.shape[0]),
+                    int(x_size * frame.shape[1]):frame.shape[1]]
+        img2 = img[0:int(y_size * frame.shape[0]),
+                    0:int(x_size * frame.shape[1])]
+
+        # binary boi
+        gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+        gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+        gray3 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        blur1 = cv2.GaussianBlur(gray1, (41, 41), 0) #<--blur boi 1
+        blur2 = cv2.GaussianBlur(gray2, (41, 41), 0) #<--blur boi 2
+        blur3 = cv2.GaussianBlur(gray3, (41, 41), 0) #<--blur boi 3
+        ret, thresh1 = cv2.threshold(blur1, threshold, 255, cv2.THRESH_BINARY)
+        ret, thresh2 = cv2.threshold(blur2, threshold, 255, cv2.THRESH_BINARY)
+        ret, thresh3 = cv2.threshold(blur3, threshold, 255, cv2.THRESH_BINARY)
+        cv2.imshow('ori1', thresh3)
+
+        MLeft = cv2.moments(thresh2)
+        MRight = cv2.moments(thresh1)
         
             # calculate x,y coordinate of center
         if (MLeft["m00"] != 0):
@@ -60,8 +95,8 @@ def findHandPos (scaleMode):
             rightcY = -1
 
         # Display the resulting frame
-        cv2.imshow('frame',frame)
-        cv2.imshow('mask',roiOut)
+        #cv2.imshow('frame',frame)
+        #cv2.imshow('mask',img)
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
 
