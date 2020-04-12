@@ -31,7 +31,7 @@ def run():
 
         thing = data.frequency * a * 2 * np.pi
 
-        n = math.sin(thing) 
+        n = data.volume * math.sin(thing) / 30
 
         #print(n) 
         #a, overflowed = s.read(1) 
