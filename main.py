@@ -75,7 +75,6 @@ def findHandPos (scaleMode):
                 leftcX = int(MLeft["m10"] / MLeft["m00"])
                 leftcY = int(MLeft["m01"] / MLeft["m00"])
 
-
                 cv2.circle(frame, (leftcX, leftcY), 5, (255, 255, 255), -1)
                 cv2.putText(frame, "centroid Left", (leftcX - 25, leftcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
             else:
