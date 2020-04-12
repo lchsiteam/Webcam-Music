@@ -67,3 +67,5 @@ Add Cascadia Code Powerline font: [Github](https://github.com/microsoft/cascadia
 project information: https://docs.google.com/document/d/1BpdIwYHkR49n2461MQNBnICoQtzkQPQGrQGLbpesn-E/edit?usp=sharing
 
 to install dependences, use `pip install --upgrade -r requirements.txt` 
+
+Run gui.py to start the program, NOT main.py
