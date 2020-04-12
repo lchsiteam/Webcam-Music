@@ -4,8 +4,12 @@ import os
 import sys
 from main import *
 import sd_testing
+import builtins
+
+builtins.run = True
 
 def startWebcam():
+    builtins.run = True
     threading.Thread(target=findHandPos, daemon=True, args=(scaleMode.get(),)).start()
     threading.Thread(target=sd_testing.run, daemon=True).start() 
 
@@ -14,6 +18,16 @@ def startWebcam():
     scaleModeHeader.place_forget()
     scaleModeStatus.place_forget()
     stopWebcamButton.pack(padx=5, pady=5)
+
+def stopWebcam():
+    builtins.run = False
+
+    startWebcamButton.pack(padx=5, pady=5)
+    scaleModeButton.pack(padx=5, pady=5)
+    scaleModeHeader.place(x=100, y=200)
+    scaleModeStatus.place(x=300, y=200)
+
+    stopWebcamButton.pack_forget()
 
 def toggleScaleMode():
     global scaleMode
@@ -90,7 +104,7 @@ stopWebcamButton = tk.Button(
     font = ('Cascadia Code PL', 15),
     borderwidth = 0,
     activebackground = "#2aa198",
-    command = lambda: os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
+    command = stopWebcam
 )
 
 # Always displayed

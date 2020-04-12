@@ -1,6 +1,8 @@
 import cv2
-
 import data
+import builtins
+
+builtins.run = True
 
 def findHandPos (scaleMode):
     cap = cv2.VideoCapture(0)
@@ -52,7 +54,7 @@ def findHandPos (scaleMode):
         # Display the resulting frame
         cv2.imshow('frame',frame)
         cv2.imshow('mask',roiOut)
-        if (cv2.waitKey(1) & 0xFF == 4):
+        if not builtins.run:
             break
 
         outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]

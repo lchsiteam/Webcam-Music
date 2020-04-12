@@ -4,6 +4,7 @@ import random
 import math
 import data
 import time
+import builtins
 
 fs = 44100
 sd.default.samplerate = fs
@@ -41,3 +42,6 @@ def run():
         s.write(array) 
 
         index += 1
+
+        if not builtins.run:
+            break
