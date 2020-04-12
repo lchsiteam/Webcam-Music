@@ -20,11 +20,11 @@ Team: Clawdawgs-19
 LCHS iTeam of La Cañada High School - https://github.com/lchsiteam
 
 ## Team members devpost, github, and discord
-Bryan Wang: https://devpost.com/the-non-feline - https://github.com/the-non-feline - not a cat#9738
-Ryan King - https://devpost.com/RyantheKing - https://github.com/RyantheKing - RyantheKing#9710
-Devyn Oh - https://devpost.com/thepnkprkr - https://github.com/MC-Atom - MC_Atom#1733
-Kai Bredemann - https://devpost.com/awesomehaze - https://github.com/awesomehaze - haze#2948
-Ean Jeffries - https://devpost.com/epicean - https://github.com/epicodaboss - Epico (Ean)#2393 - 
+Bryan Wang - https://devpost.com/the-non-feline - https://github.com/the-non-feline - not a cat#9738\n
+Ryan King - https://devpost.com/RyantheKing - https://github.com/RyantheKing - RyantheKing#9710\n
+Devyn Oh - https://devpost.com/thepnkprkr - https://github.com/MC-Atom - MC_Atom#1733\n
+Kai Bredemann - https://devpost.com/awesomehaze - https://github.com/awesomehaze - haze#2948\n
+Ean Jeffries - https://devpost.com/epicean - https://github.com/epicodaboss - Epico (Ean)#2393\n
 
 
 # Here's the whole story
