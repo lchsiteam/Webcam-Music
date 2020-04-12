@@ -183,7 +183,7 @@ def handsToParams(inputArray):
 
 
     if not scaleMode:
-        frequency = ( ( (rightX - rightSideSupplement) / rightSideWidth) * 261.625) + 261.625
+        frequency = 523.25 - ( ( (rightX - rightSideSupplement) / rightSideWidth) * 261.625)
 
     else:
         if rightX <= 1/13 * rightSideWidth + rightSideSupplement:
