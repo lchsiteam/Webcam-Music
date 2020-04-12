@@ -8,6 +8,7 @@ https://github.com/lchsiteam/theremin
 
 ## Here's the elevator pitch (tagline)
 What's your idea? This will be a short tagline for the project
+
 An instrument that you can play with your webcam anytime from anywhere.
 
 ## It's built with
