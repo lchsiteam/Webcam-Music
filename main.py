@@ -20,7 +20,6 @@ def findHandPos (scaleMode):
     
 
     while True:
-        
         x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
         y_size=1  #  (don't edit)
         threshold = 60
@@ -79,7 +78,6 @@ def findHandPos (scaleMode):
                 leftcX = int(MLeft["m10"] / MLeft["m00"])
                 leftcY = int(MLeft["m01"] / MLeft["m00"])
 
-
                 cv2.circle(frame, (leftcX, leftcY), 5, (255, 255, 255), -1)
                 cv2.putText(frame, "centroid Left", (leftcX - 25, leftcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
             else:
@@ -104,7 +102,6 @@ def findHandPos (scaleMode):
             cv2.imshow('original', frame)
             #cv2.imshow('frame',frame)
             #cv2.imshow('mask',img)
-            
 
             outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
             params = handsToParams(outArray)
@@ -113,10 +110,6 @@ def findHandPos (scaleMode):
             data.frequency = frequency
             data.volume = volume
             data.waveform = waveform
-
-            print("updated")
-
-            
 
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
