@@ -8,6 +8,10 @@ import builtins
 
 builtins.run = True
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a662308aa278f3177c8fe12b8593294cc8efff6d
 
 def startWebcam():
     builtins.run = True
