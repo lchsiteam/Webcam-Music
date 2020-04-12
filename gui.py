@@ -9,11 +9,9 @@ def startWebcam():
 
     startWebcamButton.pack_forget()
     scaleModeButton.pack_forget()
-    scaleModeHeader.pack_forget()
-    scaleModeStatus.pack_forget()
-    # toggleColorDisplayButton.pack(padx=5, pady=5)
+    scaleModeHeader.place_forget()
+    scaleModeStatus.place_forget()
     stopWebcamButton.pack(padx=5, pady=5)
-    quitButton.pack(padx=5, pady=5)
 
 def toggleScaleMode():
     global scaleMode
@@ -22,6 +20,8 @@ def toggleScaleMode():
 # define a window
 window = tk.Tk(className = " Webcam Music!")
 window.configure(background = "#002b36")
+window.geometry("480x480")
+window.resizable(width=False, height=False)
 
 scaleMode = tk.BooleanVar()
 scaleMode.set(True)
@@ -68,7 +68,7 @@ scaleModeHeader = scaleModeStatus = tk.Label(
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
 )
-scaleModeHeader.pack(side = tk.LEFT, padx = (60, 0))
+scaleModeHeader.place(x=100, y=200)
 
 scaleModeStatus = tk.Label(
     textvariable = scaleMode,
@@ -76,7 +76,7 @@ scaleModeStatus = tk.Label(
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
 )
-scaleModeStatus.pack(side = tk.LEFT)
+scaleModeStatus.place(x=300, y=200)
 
 # After webcam started
 stopWebcamButton = tk.Button(
@@ -91,9 +91,10 @@ stopWebcamButton = tk.Button(
     command = lambda: os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
 )
 
+# Always displayed
 quitButton = tk.Button(
     text = "Quit",
-    width = 25,
+    width = 15,
     height = 2,
     fg = "#268bd2",
     bg = "#073642",
@@ -102,17 +103,7 @@ quitButton = tk.Button(
     activebackground = "#2aa198",
     command = lambda: window.destroy()
 )
-
-toggleColorDisplayButton = tk.Button(
-    text = "Toggle Displayed Colors",
-    width = 25,
-    height = 2,
-    fg = "#268bd2",
-    bg = "#073642",
-    font = ('Cascadia Code PL', 15),
-    borderwidth = 0,
-    activebackground = "#2aa198"
-)
+quitButton.place(x=200, y=400)
 
 # begin event loop
 window.mainloop()
