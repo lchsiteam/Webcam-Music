@@ -5,6 +5,8 @@ import math
 import data
 import time
 import builtins
+import wave
+import scipy.io.wavfile
 
 #refresh rate
 fs = 15000
@@ -78,4 +80,6 @@ def run():
 
         index += 1
     else: 
-        print(len(contents)) 
+        c_array = np.array(contents, dtype=np.float32) 
+
+        scipy.io.wavfile.write('audio.wav', fs, c_array) 
