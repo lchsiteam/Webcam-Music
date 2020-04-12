@@ -129,44 +129,58 @@ def handsToParams(inputArray):
 
     volume = 100 - ( (leftY / screenHeight) * 100)
 
-    if not scaleMode:
-        frequency = 523.252 - ( (rightY / screenHeight) * 261.625) 
-    else:
-        if rightY <= 1/13 * screenHeight:
-            frequency = frequencyList[0]
-        elif rightY <= 2/13 * screenWidth:
-            frequency = frequencyList[1]
-        elif rightY <= 3/13 * screenWidth:
-            frequency = frequencyList[2]
-        elif rightY <= 4/13 * screenWidth:
-            frequency = frequencyList[3]
-        elif rightY <= 5/13 * screenWidth:
-            frequency = frequencyList[4]
-        elif rightY <= 6/13 * screenWidth:
-            frequency = frequencyList[5]
-        elif rightY <= 7/13 * screenWidth:
-            frequency = frequencyList[6]
-        elif rightY <= 8/13 * screenWidth:
-            frequency = frequencyList[7]
-        elif rightY <= 9/13 * screenWidth:
-            frequency = frequencyList[8]
-        elif rightY <= 10/13 * screenWidth:
-            frequency = frequencyList[9]
-        elif rightY <= 11/13 * screenWidth:
-            frequency = frequencyList[10]
-        elif rightY <= 12/13 * screenWidth:
-            frequency = frequencyList[11]
-        else:
-            frequency = frequencyList[12]
+
+
 
     selectedWaveForm = ''
 
-    if rightX >= 7/9 * screenWidth:
+    if leftX <= 1/9 * screenWidth:
         selectedWaveForm = Waveforms[2]
-    elif rightX >= 5/9 * screenWidth:
+    elif leftX <= 2/9 * screenWidth:
         selectedWaveForm = Waveforms[1]
     else:
         selectedWaveForm = Waveforms[0]
+
+
+
+    rightSideHeight = screenHeight * (2/3)
+    rightSideWidth = screenWidth * (2/3)
+    rightSideSupplement =screenWidth * (1/3)
+
+    if rightY >= (rightsideHeight):
+        volume = 0
+
+
+    if not scaleMode:
+        frequency = ( ( (rightX - rightSideSupplement) / rightSideWidth) * 261.625) + 261.625
+
+    else:
+        if rightX <= 1/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[0]
+        elif rightX <= 2/13 * rightSideWidth + rightSideSupplement :
+            frequency = frequencyList[1]
+        elif rightX <= 3/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[2]
+        elif rightX <= 4/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[3]
+        elif rightX <= 5/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[4]
+        elif rightX <= 6/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[5]
+        elif rightX <= 7/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[6]
+        elif rightX <= 8/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[7]
+        elif rightX <= 9/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[8]
+        elif rightX <= 10/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[9]
+        elif rightX <= 11/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[10]
+        elif rightX <= 12/13 * rightSideWidth + rightSideSupplement:
+            frequency = frequencyList[11]
+        else:
+            frequency = frequencyList[12]
 
     return [volume,frequency,selectedWaveForm]
 

@@ -16,8 +16,8 @@ def startWebcam():
     scaleModeButton.pack_forget()
     scaleModeHeader.place_forget()
     scaleModeStatus.place_forget()
-    captureBackgroundButton.pack(padx=5, pady=5)
     stopWebcamButton.pack(padx=5, pady=5)
+    captureBackgroundButton.pack(padx=5, pady=5)
 
 def stopWebcam():
     builtins.run = False
