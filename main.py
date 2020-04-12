@@ -24,13 +24,6 @@ def findHandPos (scaleMode):
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
     bgModel = -1
     
-    x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
-    y_size=1  #  (don't edit)
-    x1_max=0 #right hand x coor
-    x2_max=0 #left hand x coor
-    y1_max=719 #right hand y coor
-    y2_max=719 #left hand y coor
-    threshold = 60
     isBgCaptured = 0
 
     while True:
@@ -95,7 +88,7 @@ def findHandPos (scaleMode):
                         maxArea = area
                         ci = i
                 res = contours1[ci]
-                y1_max = 719
+                y1_max = frame.shape[0]-1
                 for i in range(len(res)): #adjust offset on right hand + get top of hand coordinates
                     res[i][0][0]+=(frame.shape[1]/3.0)
                     if res[i][0][1] < y1_max:
@@ -113,7 +106,7 @@ def findHandPos (scaleMode):
                             maxArea = area
                             ci = i
                     res = contours2[ci]
-                    y2_max = 719
+                    y2_max = frame.shape[0]-1
                     for i in range(len(res)): # get top of hand coordinates for left hand
                         if res[i][0][1] < y2_max:
                             y2_max = res[i][0][1]
