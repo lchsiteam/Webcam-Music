@@ -18,7 +18,7 @@ y1_max=719 #right hand y coor
 y2_max=719 #left hand y coor
 threshold = 60 #no change needed in most situations
 
-def findHandPos (scaleMode):
+def findHandPos (scaleMode,octiveConversion):
     cap = cv2.VideoCapture(0)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
     bgModel = -1
@@ -160,7 +160,7 @@ def findHandPos (scaleMode):
                 #cv2.imshow('frame',frame)
                 #cv2.imshow('mask',img)
 
-                outArray = [cameraResolution,x2_max,y2_max,x1_max,y1_max,scaleMode]
+                outArray = [cameraResolution,x2_max,y2_max,x1_max,y1_max,scaleMode,octiveConversion]
                 params = handsToParams(outArray)
                 volume, frequency, waveform = params
 
