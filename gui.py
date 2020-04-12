@@ -107,7 +107,7 @@ scaleModeStatus.place(x=300, y=200)
 
 # After webcam started
 captureBackgroundButton = tk.Button(
-    text = "Capture Background",
+    text = "Set/Reset Background",
     width = 25,
     height = 2,
     fg = "#268bd2",
