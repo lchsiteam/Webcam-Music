@@ -186,7 +186,9 @@ def handsToParams(inputArray):
     rightX = inputArray[3]
     rightY = inputArray[4]
     scaleMode = inputArray[5]
-
+    octave = inputArray[6]
+    
+    
     frequencyList = [523.251, 493.883, 466.164, 440, 415.305, 391.995, 369.994, 349.228, 329.628, 311.127, 293.665, 277.183, 261.626]
     #  c5, b4, a#4, a4, g#4, g4 f#4 f4 e4 d#4 d4 c#4 c4
 
@@ -244,6 +246,12 @@ def handsToParams(inputArray):
             frequency = frequencyList[1]
         else:
             frequency = frequencyList[0]
+            
+    if octave == 1:
+        frequency /= 2
+    elif octave == 3:
+        frequency *= 2
+  
 
     return [volume,frequency,selectedWaveForm]
 
