@@ -20,6 +20,16 @@ s.start()
 start_freq = None
 end_freq = None
 
+def sgn(num): 
+    maximum = 0.1
+
+    if num > 0: 
+        return maximum
+    elif num < 0: 
+        return -maximum
+    else: 
+        return 0
+
 def run(): 
     index = 0
 
@@ -32,7 +42,12 @@ def run():
 
         thing = data.frequency * a * 2 * np.pi
 
-        n = data.volume * math.sin(thing) / 30
+        pre_amp = math.sin(thing) 
+
+        if data.waveform == 'Square': 
+            pre_amp = sgn(pre_amp) 
+
+        n = data.volume * pre_amp / 30
 
         #print(n) 
         #a, overflowed = s.read(1) 
