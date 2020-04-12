@@ -1,11 +1,12 @@
 import cv2
 import data
 import builtins
+import numpy as np
 
 builtins.run = True
 
 def findHandPos (scaleMode):
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
 
@@ -54,7 +55,7 @@ def findHandPos (scaleMode):
         # Display the resulting frame
         cv2.imshow('frame',frame)
         cv2.imshow('mask',roiOut)
-        if not builtins.run:
+        if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
 
         outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
@@ -91,27 +92,27 @@ def handsToParams(inputArray):
     else:
         if rightY <= 1/13 * screenHeight:
             frequency = frequencyList[0]
-        elif rightX <= 2/13 * screenWidth:
+        elif rightY <= 2/13 * screenWidth:
             frequency = frequencyList[1]
-        elif rightX <= 3/13 * screenWidth:
+        elif rightY <= 3/13 * screenWidth:
             frequency = frequencyList[2]
-        elif rightX <= 4/13 * screenWidth:
+        elif rightY <= 4/13 * screenWidth:
             frequency = frequencyList[3]
-        elif rightX <= 5/13 * screenWidth:
+        elif rightY <= 5/13 * screenWidth:
             frequency = frequencyList[4]
-        elif rightX <= 6/13 * screenWidth:
+        elif rightY <= 6/13 * screenWidth:
             frequency = frequencyList[5]
-        elif rightX <= 7/13 * screenWidth:
+        elif rightY <= 7/13 * screenWidth:
             frequency = frequencyList[6]
-        elif rightX <= 8/13 * screenWidth:
+        elif rightY <= 8/13 * screenWidth:
             frequency = frequencyList[7]
-        elif rightX <= 9/13 * screenWidth:
+        elif rightY <= 9/13 * screenWidth:
             frequency = frequencyList[8]
-        elif rightX <= 10/13 * screenWidth:
+        elif rightY <= 10/13 * screenWidth:
             frequency = frequencyList[9]
-        elif rightX <= 11/13 * screenWidth:
+        elif rightY <= 11/13 * screenWidth:
             frequency = frequencyList[10]
-        elif rightX <= 12/13 * screenWidth:
+        elif rightY <= 12/13 * screenWidth:
             frequency = frequencyList[11]
         else:
             frequency = frequencyList[12]
