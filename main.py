@@ -52,7 +52,22 @@ def findHandPos (scaleMode):
         #draw rectange frame for left hand
         cv2.rectangle(frame, (int((x_size-0.003) * frame.shape[1]), 0),
                     (0, int(y_size * frame.shape[0])), (0, 255, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
+        #cv2.line(frame,(int(x_size * frame.shape[1]), 0),(int(x_size * frame.shape[1]), int(y_size * frame.shape[0])),(0, 0, 0), 5)
+
+        font = cv2.FONT_HERSHEY_COMPLEX_SMALL
+        cv2.putText(frame,'Left Hand',(frame.shape[1]//20,20),font,1,(255,140,140),1)
+        cv2.putText(frame,'Right Hand',(frame.shape[0]//20*15,20),font,1,(255,140,140),1)
+        cv2.putText(frame,'On',(frame.shape[1]//40*36,frame.shape[0]//40*4),font,1,(255,140,140),1)
+        cv2.putText(frame,'Off',(frame.shape[1]//40*35,frame.shape[0]//40*37),font,1,(255,140,140),1)
+
+        cv2.line(frame,(frame.shape[1]//40,frame.shape[0]//40),(frame.shape[1]//40,frame.shape[0]//40*38),(40,40,240),2) #volume Line, Left side of the screen
+        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//40),(frame.shape[1]//40*39,frame.shape[0]//3*2),(40,240,40),2) #volume Line, right side of the screen, green
+        cv2.line(frame,(frame.shape[1]//40*39,frame.shape[0]//3*2),(frame.shape[1]//40*39,frame.shape[0]//40*38),(40,40,240),2) #volume Line, right side of the screen, red, bottom
+
+        cv2.line(frame,(frame.shape[1]//36 ,frame.shape[0]//60*59),(frame.shape[1]//40*39,frame.shape[0]//60*59),(40,40,240),2) #volume Line, right side of the screen, red, bottom
+
         cv2.imshow('original', frame)
+        
 
         if builtins.captureBackground:
             bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
@@ -120,6 +135,9 @@ def findHandPos (scaleMode):
                             x2_max = res[i][0][0]
                     cv2.drawContours(frame, [res], 0, (0, 255, 0), 2) #draw contours
                     cv2.circle(frame, (x2_max, y2_max), 3, (0, 0, 255), 3) #draw top of hands
+
+                cv2.circle(frame,(frame.shape[1]//40,y2_max),4,(240,40,40),4) #volume dot
+                cv2.circle(frame,(frame.shape[1]*39//40,y1_max),4,(240,40,40),4) #On/Off dot
 
                 cv2.imshow('original', frame) #draw frame
                     
