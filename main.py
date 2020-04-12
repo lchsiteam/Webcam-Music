@@ -3,6 +3,8 @@ import data
 import builtins
 import numpy as np
 
+global bgModel
+bgModel = -1
 builtins.run = True
 
 def removeBG(frame):
@@ -12,9 +14,11 @@ def removeBG(frame):
     res = cv2.bitwise_and(frame, frame, mask=fgmask)
     return res
 
+def newBackround():
+    bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
+
 def findHandPos (scaleMode):
     cap = cv2.VideoCapture(1)
-    bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
 
     while(True):
@@ -43,70 +47,74 @@ def findHandPos (scaleMode):
 
         #  big boi calculations
         
-        fgmask = bgModel.apply(frame,learningRate=0)
-        kernel = np.ones((3, 3), np.uint8)
-        fgmask = cv2.erode(fgmask, kernel, iterations=1)
-        img = cv2.bitwise_and(frame, frame, mask=fgmask)
+        if bgModel != -1:
 
-        img1 = img[0:int(y_size * frame.shape[0]),
-                    int(x_size * frame.shape[1]):frame.shape[1]]
-        img2 = img[0:int(y_size * frame.shape[0]),
-                    0:int(x_size * frame.shape[1])]
+            fgmask = bgModel.apply(frame,learningRate=0)
+            kernel = np.ones((3, 3), np.uint8)
+            fgmask = cv2.erode(fgmask, kernel, iterations=1)
+            img = cv2.bitwise_and(frame, frame, mask=fgmask)
 
-        # binary boi
-        gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
-        gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
-        gray3 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        blur1 = cv2.GaussianBlur(gray1, (41, 41), 0) #<--blur boi 1
-        blur2 = cv2.GaussianBlur(gray2, (41, 41), 0) #<--blur boi 2
-        blur3 = cv2.GaussianBlur(gray3, (41, 41), 0) #<--blur boi 3
-        ret, thresh1 = cv2.threshold(blur1, threshold, 255, cv2.THRESH_BINARY)
-        ret, thresh2 = cv2.threshold(blur2, threshold, 255, cv2.THRESH_BINARY)
-        ret, thresh3 = cv2.threshold(blur3, threshold, 255, cv2.THRESH_BINARY)
-        cv2.imshow('ori1', thresh3)
+            img1 = img[0:int(y_size * frame.shape[0]),
+                        int(x_size * frame.shape[1]):frame.shape[1]]
+            img2 = img[0:int(y_size * frame.shape[0]),
+                        0:int(x_size * frame.shape[1])]
 
-        MLeft = cv2.moments(thresh2)
-        MRight = cv2.moments(thresh1)
-        
-            # calculate x,y coordinate of center
-        if (MLeft["m00"] != 0):
-            leftcX = int(MLeft["m10"] / MLeft["m00"])
-            leftcY = int(MLeft["m01"] / MLeft["m00"])
+            # binary boi
+            gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+            gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+            gray3 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            blur1 = cv2.GaussianBlur(gray1, (41, 41), 0) #<--blur boi 1
+            blur2 = cv2.GaussianBlur(gray2, (41, 41), 0) #<--blur boi 2
+            blur3 = cv2.GaussianBlur(gray3, (41, 41), 0) #<--blur boi 3
+            ret, thresh1 = cv2.threshold(blur1, threshold, 255, cv2.THRESH_BINARY)
+            ret, thresh2 = cv2.threshold(blur2, threshold, 255, cv2.THRESH_BINARY)
+            ret, thresh3 = cv2.threshold(blur3, threshold, 255, cv2.THRESH_BINARY)
+            cv2.imshow('ori1', thresh3)
 
-
-            cv2.circle(frame, (leftcX, leftcY), 5, (255, 255, 255), -1)
-            cv2.putText(frame, "centroid Left", (leftcX - 25, leftcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-        else:
-            leftcX = -1
-            leftcY = -1
-
-        if (MRight["m00"] != 0):
-            # calculate x,y coordinate of center
-            rightcX = int(MRight["m10"] / MRight["m00"])
-            rightcY = int(MRight["m01"] / MRight["m00"])
-
-            rightcX += cameraResolution[0]//3
+            MLeft = cv2.moments(thresh2)
+            MRight = cv2.moments(thresh1)
+            
+                # calculate x,y coordinate of center
+            if (MLeft["m00"] != 0):
+                leftcX = int(MLeft["m10"] / MLeft["m00"])
+                leftcY = int(MLeft["m01"] / MLeft["m00"])
 
 
-            cv2.circle(frame, (rightcX, rightcY), 5, (255, 255, 255), -1)
-            cv2.putText(frame, "centroid Right", (rightcX - 25, rightcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-        else:
-            rightcX = -1
-            rightcY = -1
+                cv2.circle(frame, (leftcX, leftcY), 5, (255, 255, 255), -1)
+                cv2.putText(frame, "centroid Left", (leftcX - 25, leftcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+            else:
+                leftcX = -1
+                leftcY = -1
 
-        # Display the resulting frame
-        #cv2.imshow('frame',frame)
-        #cv2.imshow('mask',img)
+            if (MRight["m00"] != 0):
+                # calculate x,y coordinate of center
+                rightcX = int(MRight["m10"] / MRight["m00"])
+                rightcY = int(MRight["m01"] / MRight["m00"])
+
+                rightcX += cameraResolution[0]//3
+
+
+                cv2.circle(frame, (rightcX, rightcY), 5, (255, 255, 255), -1)
+                cv2.putText(frame, "centroid Right", (rightcX - 25, rightcY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+            else:
+                rightcX = -1
+                rightcY = -1
+
+            # Display the resulting frame
+            #cv2.imshow('frame',frame)
+            #cv2.imshow('mask',img)
+            
+
+            outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
+            params = handsToParams(outArray)
+            volume, frequency, waveform = params
+
+            data.frequency = frequency
+            data.volume = volume
+            data.waveform = waveform
+
         if (cv2.waitKey(1) & 0xFF == 4 or not builtins.run):
             break
-
-        outArray = [cameraResolution,leftcX,leftcY,rightcX,rightcY,scaleMode]
-        params = handsToParams(outArray)
-        volume, frequency, waveform = params
-
-        data.frequency = frequency
-        data.volume = volume
-        data.waveform = waveform
 
     # When everything done, release the capture
     cap.release()
@@ -147,7 +155,7 @@ def handsToParams(inputArray):
     rightSideWidth = screenWidth * (2/3)
     rightSideSupplement =screenWidth * (1/3)
 
-    if rightY >= (rightsideHeight):
+    if rightY >= (rightSideHeight):
         volume = 0
 
 
