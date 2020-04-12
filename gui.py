@@ -92,7 +92,7 @@ scaleModeHeader = scaleModeStatus = tk.Label(
 scaleModeHeader.place(x=100, y=200)
 
 scaleModeStatus = tk.Label(
-    text = extraText,
+    textvariable = extraText,
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
