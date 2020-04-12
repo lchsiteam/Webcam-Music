@@ -27,8 +27,8 @@ def findHandPos (scaleMode):
         ret,thresh = cv2.threshold(gray,200,255,0)
 
         roiOut=thresh[0:cameraResolution[1], 0:cameraResolution[0]]
-        roiLeft=thresh[0:cameraResolution[1], 0:cameraResolution[0]//6]
-        roiRight=thresh[0:cameraResolution[1], cameraResolution[0]//6:cameraResolution[0]]
+        roiLeft=thresh[0:cameraResolution[1], 0:cameraResolution[0]//3]
+        roiRight=thresh[0:cameraResolution[1], cameraResolution[0]//3:cameraResolution[0]]
 
         MLeft = cv2.moments(roiLeft)
         MRight = cv2.moments(roiRight)
@@ -50,7 +50,7 @@ def findHandPos (scaleMode):
             rightcX = int(MRight["m10"] / MRight["m00"])
             rightcY = int(MRight["m01"] / MRight["m00"])
 
-            rightcX += cameraResolution[0]//6
+            rightcX += cameraResolution[0]//3
 
 
             cv2.circle(frame, (rightcX, rightcY), 5, (255, 255, 255), -1)
@@ -72,7 +72,6 @@ def findHandPos (scaleMode):
         data.frequency = frequency
         data.volume = volume
         data.waveform = waveform
-        print(params)
 
     # When everything done, release the capture
     cap.release()
