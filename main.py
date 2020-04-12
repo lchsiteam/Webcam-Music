@@ -6,7 +6,7 @@ import numpy as np
 builtins.captureBackground = False
 builtins.run = True
 
-def removeBG(frame):
+def removeBG(frame):   #removes the background from the input frame
     fgmask = bgModel.apply(frame,learningRate=0)
     kernel = np.ones((3, 3), np.uint8)
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
@@ -41,8 +41,7 @@ def findHandPos (scaleMode):
                     (frame.shape[1], int(y_size * frame.shape[0])), (255, 0, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
         cv2.rectangle(frame, (int((x_size-0.003) * frame.shape[1]), 0),
                     (0, int(y_size * frame.shape[0])), (0, 255, 0), 2) #<-- dis thing makes the fancy rectangle to put thou hand in.
-        cv2.imshow('original', frame)
-
+        
         #  big boi calculations
         
         if builtins.captureBackground:
@@ -102,6 +101,7 @@ def findHandPos (scaleMode):
                 rightcY = -1
 
             # Display the resulting frame
+            cv2.imshow('original', frame)
             #cv2.imshow('frame',frame)
             #cv2.imshow('mask',img)
             
