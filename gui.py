@@ -8,11 +8,7 @@ import builtins
 
 builtins.run = True
 
-global scaleMode
-if scaleMode.get():    
-    extraText = "active"
-else:
-    extraText = "disabled"
+
 
 def startWebcam():
     builtins.run = True
@@ -93,7 +89,7 @@ scaleModeHeader = scaleModeStatus = tk.Label(
 scaleModeHeader.place(x=100, y=200)
 
 scaleModeStatus = tk.Label(
-    textvariable = extraText,
+    textvariable = scaleMode,
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
