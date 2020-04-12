@@ -17,7 +17,6 @@ x2_max=0 #left hand x coor
 y1_max=719 #right hand y coor
 y2_max=719 #left hand y coor
 threshold = 60 #no change needed in most situations
-backgroundCaptured = False
 
 def findHandPos (scaleMode):
     cap = cv2.VideoCapture(0)
