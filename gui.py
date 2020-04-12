@@ -8,10 +8,6 @@ import builtins
 
 builtins.run = True
 
-if main.scaleMode:
-    extraText = "active"
-else:
-    extraText = "disabled"
 
 def startWebcam():
     builtins.run = True
@@ -37,6 +33,7 @@ def stopWebcam():
 def toggleScaleMode():
     global scaleMode
     scaleMode.set(not scaleMode.get())
+
 
 # define a window
 window = tk.Tk(className = " Webcam Music!")
@@ -84,20 +81,26 @@ scaleModeButton = tk.Button(
 scaleModeButton.pack(padx=5, pady=5)
 
 scaleModeHeader = scaleModeStatus = tk.Label(
-    text = "Scale Mode is currently: ",
+    text = "Scale Mode is currently ",
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
 )
 scaleModeHeader.place(x=100, y=200)
 
+if scaleMode:
+    extraText = ("active")
+else:
+    extraText = ("disabled")
+    
 scaleModeStatus = tk.Label(
+
     text = extraText,
     fg = "#268bd2",
     bg = "#002b36",
     font = ('Cascadia Code PL', 10)
 )
-scaleModeStatus.place(x=300, y=200)
+scaleModeStatus.place(x=242, y=200)
 
 # After webcam started
 stopWebcamButton = tk.Button(
