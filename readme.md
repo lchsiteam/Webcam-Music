@@ -1,4 +1,4 @@
-### TitanHacks 2020
+# TitanHacks 2020
 
 ## Project Name
 Webcam Music (scroll all the way to bottom for installation instructions)
@@ -27,7 +27,7 @@ Kai Bredemann - https://devpost.com/awesomehaze - https://github.com/awesomehaze
 Ean Jeffries - https://devpost.com/epicean - https://github.com/epicodaboss - Epico (Ean)#2393 - 
 
 
-### Here's the whole story
+# Here's the whole story
 
 ## Inspiration
 We were inspired by music. Half of our group is in choir, and half of our group makes original music for fun. Making music is very fun and rewarding, but it’s very hard for beginners to figure out some of the more complicated aspects. This project makes it easier for those beginners to have some fun creating music, even if it’s not super practical.
@@ -51,7 +51,7 @@ How to better and more efficiently work on programs in teams, as well as learnin
 We plan to improve and eventually publish our creation so that others can have fun with the tool we enjoy.  We will likely code the system to recognize hand gestures, and perform more musical features such as holding a note or a staccato.
 
 
-### How to install project
+# How to install project
 Install opencv: pip install opencv-python
 
 Add Cascadia Code font: [Github](https://github.com/microsoft/cascadia-code/releases/download/v1911.21/CascadiaPL.ttf)
