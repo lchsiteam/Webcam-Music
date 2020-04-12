@@ -6,7 +6,7 @@ import data
 import time
 import builtins
 
-fs = 44100
+fs = 15000
 sd.default.samplerate = fs
 sd.default.channels = 2
 
@@ -34,6 +34,7 @@ def run():
     index = 0
     #prev_n = None
     #current_freq = 440
+    current_freq = None
 
     while True: 
         rounds, a_index = divmod(index, len(t)) 
@@ -43,7 +44,6 @@ def run():
         #print(data.frequency) 
         
         #print(current_freq) 
-
         current_freq = data.frequency
 
         thing = current_freq * a * 2 * np.pi
@@ -70,7 +70,7 @@ def run():
         #print(n) 
         #a, overflowed = s.read(1) 
 
-        array = np.array((actual_n, actual_n), np.float32) 
+        array = np.array((actual_n,), np.float32) 
 
         s.write(array) 
 
