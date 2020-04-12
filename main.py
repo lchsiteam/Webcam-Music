@@ -9,6 +9,7 @@ import numpy as np
 
 data.captureBackground = False
 data.run = True
+data.currentOctive = 2
 
 x_size=float(1.0/3.0)  #represent 0.7ths of the screen (vertically divided)
 y_size=1  #  (don't edit)
@@ -18,7 +19,7 @@ y1_max=719 #right hand y coor
 y2_max=719 #left hand y coor
 threshold = 60 #no change needed in most situations
 
-def findHandPos (scaleMode,octiveConversion):
+def findHandPos (scaleMode):
     cap = cv2.VideoCapture(0)
     cameraResolution = [int(cap.get(3)), int(cap.get(4))]
     bgModel = -1
@@ -160,7 +161,7 @@ def findHandPos (scaleMode,octiveConversion):
                 #cv2.imshow('frame',frame)
                 #cv2.imshow('mask',img)
 
-                outArray = [cameraResolution,x2_max,y2_max,x1_max,y1_max,scaleMode,octiveConversion]
+                outArray = [cameraResolution,x2_max,y2_max,x1_max,y1_max,scaleMode,data.currentOctive]
                 params = handsToParams(outArray)
                 volume, frequency, waveform = params
 

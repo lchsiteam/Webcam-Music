@@ -19,6 +19,9 @@ def startWebcam():
     scaleModeStatus.place_forget()
     stopWebcamButton.pack(padx=5, pady=5)
     captureBackgroundButton.pack(padx=5, pady=5)
+    toggleOctiveButton.pack(padx=5, pady=5)
+    currentOctiveHeader.place(x=100, y=250)
+    currentOctiveStatus.place(x=300, y=250)
 
 def stopWebcam():
     data.run = False
@@ -28,6 +31,9 @@ def stopWebcam():
     scaleModeHeader.place(x=100, y=200)
     scaleModeStatus.place(x=300, y=200)
 
+    toggleOctiveButton.pack_forget()
+    currentOctiveHeader.place_forget()
+    currentOctiveStatus.place_forget()
     captureBackgroundButton.pack_forget()
     stopWebcamButton.pack_forget()
 
@@ -42,6 +48,16 @@ def toggleScaleMode():
 def captureBackground():
     data.captureBackground = True
 
+def toggleOctive():
+    if data.currentOctive == 2:
+        data.currentOctive = 3
+    elif data.currentOctive == 3:
+        data.currentOctive = 1
+    elif data.currentOctive == 1:
+        data.currentOctive = 2
+
+    tkCurrentOctive.set(data.currentOctive)
+
 # define a window
 window = tk.Tk(className = " Webcam Music!")
 window.configure(background = "#002b36")
@@ -53,6 +69,8 @@ scaleMode = tk.BooleanVar()
 scaleMode.set(True)
 scaleModeString = tk.StringVar()
 scaleModeString.set("enabled")
+tkCurrentOctive = tk.IntVar()
+tkCurrentOctive.set(2)
 
 # add title
 title = tk.Label(
@@ -90,7 +108,7 @@ scaleModeButton = tk.Button(
 )
 scaleModeButton.pack(padx=5, pady=5)
 
-scaleModeHeader = scaleModeStatus = tk.Label(
+scaleModeHeader = tk.Label(
     text = "Scale Mode is currently: ",
     fg = "#268bd2",
     bg = "#002b36",
@@ -129,6 +147,32 @@ stopWebcamButton = tk.Button(
     borderwidth = 0,
     activebackground = "#2aa198",
     command = stopWebcam
+)
+
+toggleOctiveButton = tk.Button(
+    text = "Toggle Current Octive",
+    width = 25,
+    height = 2,
+    fg = "#268bd2",
+    bg = "#073642",
+    font = ('Cascadia Code PL', 15),
+    borderwidth = 0,
+    activebackground = "#2aa198",
+    command = toggleOctive
+)
+
+currentOctiveHeader = scaleModeStatus = tk.Label(
+    text = "The current octive is: ",
+    fg = "#268bd2",
+    bg = "#002b36",
+    font = ('Cascadia Code PL', 10)
+)
+
+currentOctiveStatus = tk.Label(
+    textvariable = tkCurrentOctive,
+    fg = "#268bd2",
+    bg = "#002b36",
+    font = ('Cascadia Code PL', 10)
 )
 
 # Always displayed
