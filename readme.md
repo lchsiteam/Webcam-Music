@@ -1,4 +1,4 @@
-# TitanHacks 2020
+# TitanHacks 2020 - 2nd Place Winner
 
 ## Project Name
 Webcam Music (scroll all the way to bottom for installation instructions)
