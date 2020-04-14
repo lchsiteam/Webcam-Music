@@ -1,6 +1,20 @@
 import cv2
 import numpy as np
 
+class OpenCVVersionError(Exception): # for when there is incompatible version of opencv
+    pass
+
+MAJOR, MINOR, *_ = cv2.__version__.split('.') 
+
+if MAJOR == '4': # opencv 4
+    C_START = 0
+elif MAJOR == '3': # opencv 3
+    C_START = 1
+else: # opencv not 3 or 4 and thus bad
+    raise OpenCVVersionError(f'Your version of OpenCV ({cv2.__version__}) is incompatible; please upgrade to OpenCV 3 or OpenCV 4') 
+
+#print(MAJOR) 
+
 #make sure your hands are out of frame.  Do not move your head out of frame and then put it in, either always have it out, or always have it in
 #press x
 #move hands into respective boxes
@@ -52,8 +66,17 @@ while camera.isOpened():
         cv2.imshow('ori 2', thresh2)
 
         #_, contours, _= cv2.findContours(skin_ycrcb, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        '''
         _, contours1, hierarchy1 = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         _, contours2, hierarchy2 = cv2.findContours(thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        ''' 
+        
+        c = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+        c2 = cv2.findContours(thresh2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) 
+
+        contours1, hierarchy1 = c[C_START:] 
+        contours2, hierarchy2 = c2[C_START:] 
+
         length1 = len(contours1)
         length2 = len(contours2)
         maxArea = -1
